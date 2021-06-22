@@ -16,7 +16,7 @@ fun fizzBuzz(n: Int): String {
 }
 
 fun main() {
-    for (n in 1..100) {
+    for (n in 1..101) {
         print(fizzBuzz(n))
     }
 }
