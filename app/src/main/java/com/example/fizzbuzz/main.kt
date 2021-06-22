@@ -42,7 +42,7 @@ fun fizzBuzz(n: Int, order: List<OrderRule>, rules: List<StringRule>): String {
     return result
 }
 
-fun main() {
+fun main(args: Array<String>) {
     val threeFizz = StringRule(3, "Fizz")
     val fiveBuzz = StringRule(5, "Buzz")
     val sevenBang = StringRule(7, "Bang")
@@ -55,10 +55,37 @@ fun main() {
     val seventeenOrder = OrderRule(17)
     seventeenOrder.setOrderFun{rules: List<StringRule> -> rules.reversed()}
 
-    val rules = listOf(threeFizz, fiveBuzz, sevenBang, elevenBong, thirteenFezz)
-    val order = listOf(elevenOrder, seventeenOrder)
+    val numberLimit: Int = 0
+    var rules =  mutableListOf<StringRule>()
+    var order =  mutableListOf<OrderRule>()
 
-    for (n in 1..101) {
+    if (args.size > 1) {
+        for (i in args.slice(1..args.size)) {
+            when (i.toIntOrNull()) {
+                3 -> {
+                    rules.add(threeFizz)
+                }
+                5 -> {
+                    rules.add(fiveBuzz)
+                }
+                7 -> {
+                    rules.add(sevenBang)
+                }
+                11 -> {
+                    rules.add(elevenBong)
+                    order.add(elevenOrder)
+                }
+                13 -> {
+                    rules.add(thirteenFezz)
+                }
+                17 -> {
+                    order.add(seventeenOrder)
+                }
+            }
+        }
+    }
+
+    for (n in 1..numberLimit) {
         println("$n: ${fizzBuzz(n, order, rules)}")
     }
 }
