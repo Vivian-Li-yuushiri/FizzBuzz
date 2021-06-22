@@ -55,12 +55,13 @@ fun main(args: Array<String>) {
     val seventeenOrder = OrderRule(17)
     seventeenOrder.setOrderFun{rules: List<StringRule> -> rules.reversed()}
 
-    val numberLimit: Int = 0
+    var numberLimit: Int = 0
     var rules =  mutableListOf<StringRule>()
     var order =  mutableListOf<OrderRule>()
 
     if (args.size > 1) {
-        for (i in args.slice(1..args.size)) {
+        numberLimit = args[0].toInt()
+        for (i in args.drop(1)) {
             when (i.toIntOrNull()) {
                 3 -> {
                     rules.add(threeFizz)
@@ -81,6 +82,7 @@ fun main(args: Array<String>) {
                 17 -> {
                     order.add(seventeenOrder)
                 }
+                null -> println("Invalid argument")
             }
         }
     }
